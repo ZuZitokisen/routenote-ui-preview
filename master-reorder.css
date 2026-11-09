@@ -1,0 +1,109 @@
+/* Reorder mode leaves native vertical scrolling available before a long press. */
+.master-reorder-enabled .master-reorder-row {
+  position: relative;
+  cursor: grab;
+  touch-action: pan-y pinch-zoom;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+  transition: transform 180ms cubic-bezier(.2,.7,.25,1), background-color 120ms ease;
+  will-change: auto;
+}
+.master-reorder-enabled .master-reorder-row::before,
+.master-reorder-ghost::before {
+  content: '';
+  display: block;
+  flex: 0 0 13px;
+  width: 13px;
+  height: 22px;
+  color: var(--green, #174b41);
+  opacity: .65;
+  background-image: radial-gradient(circle, currentColor 1.5px, transparent 1.8px);
+  background-size: 6px 7px;
+  background-position: 0 0;
+}
+.master-reorder-enabled .master-reorder-row:focus-visible {
+  z-index: 2;
+  outline: 3px solid var(--green, #174b41);
+  outline-offset: -3px;
+}
+.master-reorder-enabled .master-reorder-pressed { background-color: var(--page-soft, #eef5ed); }
+.master-reorder-dragging .master-reorder-row { will-change: transform; }
+.master-reorder-dragging .master-reorder-placeholder {
+  z-index: 0;
+  background: var(--page-soft, #eef5ed);
+  box-shadow: inset 0 0 0 2px var(--green, #174b41);
+  opacity: .35;
+  cursor: grabbing;
+}
+.master-reorder-placeholder > *,
+.master-reorder-placeholder::before { visibility: hidden; }
+.master-reorder-enabled .master-reorder-keyboard {
+  z-index: 3;
+  outline: 3px solid var(--green, #174b41);
+  outline-offset: -3px;
+  background: var(--page-soft, #eef5ed);
+}
+.master-reorder-actions {
+  display: flex;
+  flex: 0 0 auto;
+  gap: 4px;
+  margin-left: auto;
+}
+.master-reorder-step {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  min-width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 1px solid var(--line, #dfe7d9);
+  border-radius: 8px;
+  background: var(--page-bg, #fff);
+  color: var(--green, #174b41);
+  font: inherit;
+  font-size: 21px;
+  font-weight: 650;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+.master-reorder-step:disabled { opacity: .3; cursor: default; }
+.master-reorder-step:focus-visible { outline: 3px solid var(--green, #174b41); outline-offset: 1px; }
+.master-reorder-ghost .master-reorder-actions { visibility: hidden; }
+.master-reorder-ghost.master-card,
+.master-reorder-ghost {
+  position: fixed !important;
+  z-index: 10000 !important;
+  box-sizing: border-box !important;
+  margin: 0 !important;
+  min-height: 0 !important;
+  border: 1px solid var(--green, #174b41) !important;
+  border-radius: 10px !important;
+  background: var(--page-bg, #fff) !important;
+  box-shadow: 0 12px 28px #132b3130, 0 2px 6px #132b311c;
+  opacity: .98;
+  overflow: hidden;
+  pointer-events: none !important;
+  touch-action: none;
+  cursor: grabbing;
+  transition: none !important;
+  will-change: transform;
+}
+.master-reorder-pointer-active,
+.master-reorder-pointer-active * { cursor: grabbing !important; }
+.master-reorder-enabled[aria-busy="true"] .master-reorder-row { cursor: progress; }
+.master-reorder-live {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+@media (prefers-reduced-motion: reduce) {
+  .master-reorder-enabled .master-reorder-row { transition: none; }
+}

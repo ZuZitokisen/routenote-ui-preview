@@ -1,0 +1,63 @@
+.invoice-controls{display:grid;grid-template-columns:minmax(150px,1fr) minmax(200px,1.5fr);align-items:end;gap:16px;background:#fff;border:1px solid var(--line);border-radius:16px;padding:20px}
+.invoice-controls .field{margin:0;min-width:0}.invoice-controls input,.invoice-controls select{width:100%;max-width:100%}.invoice-actions{grid-column:1/-1;display:flex;gap:12px;flex-wrap:wrap}.invoice-actions .primary{flex:1}.invoice-guide{color:var(--muted);font-size:12px;line-height:1.8;margin:14px 0 20px}.invoice-guide p{margin:5px 0}.invoice-warning{color:#754a1b;background:#fcf8ed;border:1px solid #e8d7b4;padding:12px;font-size:12px;line-height:1.7}.invoice-download-status{font-size:13px;color:var(--muted);min-height:1.5em}
+#invoice-preview{display:grid;gap:22px}.invoice-paper{width:100%;max-width:688px;aspect-ratio:182/257;margin:0 auto;padding:0;background:#fff;border:1px solid #dce3dc;box-shadow:0 8px 35px #243c3410;overflow:hidden}.invoice-paper svg{display:block;width:100%;height:auto;aspect-ratio:182/257;color:#000}.invoice-paper svg text{letter-spacing:normal}
+@media(max-width:600px){.invoice-controls{grid-template-columns:1fr;padding:18px;gap:18px}.invoice-actions{display:grid;grid-template-columns:1fr}.invoice-actions .button{width:100%}.invoice-guide{font-size:12px}.invoice-paper{border-color:#dce3dc}.invoice-download-status{font-size:12px}}
+@page{size:182mm 257mm;margin:0}
+@media print{
+ body.invoice-printing{background:#fff!important;color:#000!important}
+ body.invoice-printing .sidebar,body.invoice-printing .topbar,body.invoice-printing .mobile-nav,body.invoice-printing .prototype-banner,body.invoice-printing .app-updates,body.invoice-printing .page-footer,body.invoice-printing #global-error,body.invoice-printing #toast,body.invoice-printing #update-toast,body.invoice-printing .input-assist,body.invoice-printing dialog{display:none!important}
+ body.invoice-printing .app-shell,body.invoice-printing .main-shell,body.invoice-printing main{display:block!important;width:auto!important;max-width:none!important;min-height:0!important;margin:0!important;padding:0!important}
+ body.invoice-printing main>section:not(#output-section),body.invoice-printing #output-section>:not(#invoice-preview){display:none!important}
+ body.invoice-printing #output-section,body.invoice-printing #invoice-preview{display:block!important;margin:0!important;padding:0!important}
+ body.invoice-printing .invoice-paper{display:block;width:182mm;height:257mm;max-width:none;margin:0;padding:0;border:0;box-shadow:none;break-after:page;break-inside:avoid;overflow:hidden}
+ body.invoice-printing .invoice-paper:last-child{break-after:auto}
+ body.invoice-printing .invoice-paper svg{display:block;width:182mm;height:257mm;print-color-adjust:exact;-webkit-print-color-adjust:exact}
+}
+
+.invoice-optional{grid-column:1/-1;display:flex;align-items:center;gap:10px;font-size:13px;line-height:1.6}.invoice-optional[hidden]{display:none}.invoice-controls .invoice-optional input{width:18px;height:18px;flex:0 0 18px}
+.invoice-save-result{display:flex;align-items:center;gap:12px;margin:-4px 0 20px}.invoice-save-result[hidden]{display:none}.invoice-save-result a{text-decoration:none;min-width:180px;justify-content:center}
+
+/* Separate, local-only invoice identity editor. Native dialogs may stack over
+   a customer detail dialog; closing this editor restores its originating button. */
+.invoice-settings-dialog{width:min(580px,calc(100vw - 28px));max-width:580px;max-height:calc(100dvh - 28px);padding:0;border:1px solid var(--line);border-radius:18px;overflow:hidden;color:var(--text,#203e34);background:#fff}
+.invoice-settings-dialog::backdrop{background:#18332966}
+.invoice-settings-dialog form{display:flex;flex-direction:column;max-height:calc(100dvh - 30px);margin:0}
+.invoice-settings-dialog .dialog-head,.invoice-settings-dialog .dialog-foot{flex:none}
+.invoice-settings-dialog .dialog-head{align-items:flex-start;gap:12px}
+.invoice-settings-dialog .dialog-head>div{min-width:0}
+.invoice-settings-dialog .dialog-head h2{margin:0 0 6px;font-size:20px}
+.invoice-settings-dialog .dialog-head p{margin:0;overflow-wrap:anywhere}
+.invoice-settings-dialog .dialog-head .icon-button{flex:none;width:44px;height:44px;font-size:24px}
+.invoice-settings-dialog .dialog-body{min-height:0;overflow:auto;overscroll-behavior:contain;padding:20px}
+.invoice-settings-fields{display:grid;gap:18px;margin:18px 0}
+.invoice-settings-fields .field{margin:0;min-width:0}
+.invoice-settings-fields .field span small{color:var(--muted);font-size:12px;font-weight:400}
+.invoice-settings-fields input,.invoice-settings-fields textarea{width:100%;max-width:100%;font:inherit;font-size:16px;min-height:48px}
+.invoice-settings-fields textarea{min-height:100px;resize:vertical;line-height:1.6}
+.invoice-settings-note{font-size:12px;line-height:1.8;color:var(--muted);margin:0 0 12px}
+.invoice-settings-dialog .dialog-foot{display:flex;justify-content:flex-end;gap:12px}
+.invoice-settings-dialog .dialog-foot .button{min-width:110px;min-height:48px}
+.invoice-settings-discard{border:1px solid #e8d7b4;background:#fcf8ed;padding:14px;border-radius:10px;font-size:13px;line-height:1.7}
+.invoice-settings-discard[hidden]{display:none}
+.invoice-settings-discard p{margin:0 0 12px}
+.invoice-settings-discard .actions{display:flex;flex-wrap:wrap;gap:10px}
+@media(max-width:600px){.invoice-settings-dialog{width:calc(100vw - 20px);max-height:calc(100dvh - 20px)}.invoice-settings-dialog form{max-height:calc(100dvh - 22px)}.invoice-settings-dialog .dialog-body{padding:18px}.invoice-settings-dialog .dialog-foot .button{flex:1;min-width:0}.invoice-settings-discard .actions .button{flex:1;font-size:12px;padding-inline:10px}}
+.invoice-settings-values{display:grid;gap:18px;margin:22px 0}.invoice-settings-values>div{min-width:0}.invoice-settings-values dt{font-size:12px;color:var(--muted);margin-bottom:7px}.invoice-settings-values dd{font-size:16px;margin:0;white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.6}.invoice-settings-dialog #invoice-settings-status{font-size:13px;color:#174b41;line-height:1.7}.invoice-settings-dialog #invoice-settings-status:empty{display:none}
+
+/* Locale-independent resting date; focus exposes the native date editor/picker. */
+.invoice-date-control{display:block;position:relative;min-width:0}
+.invoice-date-control input{width:100%;opacity:0;position:relative;z-index:1;cursor:pointer}
+.invoice-date-formatted{position:absolute;inset:0;display:flex;align-items:center;border:1px solid var(--line);border-radius:10px;padding:12px;background:#fff;color:var(--text,#203e34);font-size:16px;pointer-events:none}
+.invoice-date-control:focus-within .invoice-date-formatted{visibility:hidden}
+.invoice-date-control:focus-within input{opacity:1}
+.invoice-date-control:focus-within{outline:3px solid #4a9e87;outline-offset:2px;border-radius:10px}
+.invoice-date-control.is-disabled .invoice-date-formatted{color:var(--muted);background:#f4f5f2}
+.invoice-date-control.is-disabled input{cursor:default}
+.invoice-settings-fields select{width:100%;max-width:100%;font:inherit;font-size:16px;min-height:48px}
+.invoice-bank-group+.invoice-bank-group{border-top:1px solid var(--line);padding-top:18px;margin-top:22px}.invoice-bank-group h3{font-size:16px;margin:18px 0 10px}
+
+/* Private local seal controls. Never part of printed document content. */
+.invoice-seal-controls{grid-column:1/-1;border-top:1px solid var(--line);padding-top:16px;min-width:0}.invoice-seal-controls h2{font-size:15px;margin:0 0 10px}.invoice-seal-actions{display:flex;flex-wrap:wrap;gap:8px}.invoice-seal-actions .button{min-height:44px}.invoice-seal-controls p,.invoice-seal-controls details{font-size:12px;line-height:1.7;color:var(--muted);overflow-wrap:anywhere}.invoice-seal-controls summary{cursor:pointer;min-height:44px;display:flex;align-items:center}.invoice-seal-controls .invoice-optional{min-height:44px}.invoice-seal-controls input[hidden]{display:none}
+
+/* Use the native file control directly: no hidden-input synthetic click. */
+.invoice-seal-actions{align-items:flex-end}.invoice-seal-picker{display:grid;gap:6px;min-width:0;flex:1 1 220px}.invoice-seal-picker>span{font-size:12px;color:var(--muted)}.invoice-seal-picker input[type=file]{display:block;width:100%;min-width:0;max-width:100%;min-height:44px;margin:0;padding:0;font:inherit;font-size:14px;line-height:44px;background:transparent;border:0;border-radius:8px;color:var(--text)}.invoice-seal-picker input::file-selector-button{min-height:44px;margin-right:8px;padding:8px 12px;border:1px solid var(--line);border-radius:8px;background:#fff;color:var(--text);font:inherit;cursor:pointer}.invoice-seal-picker input:disabled{opacity:.6}.invoice-seal-picker input:focus-visible{outline:3px solid #4a9e87;outline-offset:2px}.invoice-seal-controls p.form-error{color:#9b2424;font-weight:600}
